@@ -21,7 +21,7 @@ static volatile uint8_t *const reg_status[MAX_ISR_REG_NUM] = {
 	&ISR8, &ISR9, &ISR10, &ISR11,
 	&ISR12, &ISR13, &ISR14, &ISR15,
 	&ISR16, &ISR17, &ISR18, &ISR19,
-	&ISR20
+	&ISR20,&ISR21,&ISR22
 };
 
 static volatile uint8_t *const reg_enable[MAX_ISR_REG_NUM] = {
@@ -30,7 +30,7 @@ static volatile uint8_t *const reg_enable[MAX_ISR_REG_NUM] = {
 	&IER8, &IER9, &IER10, &IER11,
 	&IER12, &IER13, &IER14, &IER15,
 	&IER16, &IER17, &IER18, &IER19,
-	&IER20
+	&IER20,&IER21,&IER22
 };
 
 /* edge/level trigger register */
@@ -70,7 +70,6 @@ static void ite_intc_isr_clear(unsigned int irq)
 {
 	uint32_t g, i;
 	volatile uint8_t *isr;
-
 	if (irq > CONFIG_NUM_IRQS) {
 		return;
 	}
@@ -90,6 +89,7 @@ void ite_intc_irq_enable(unsigned int irq)
 	}
 	g = irq / MAX_REGISR_IRQ_NUM;
 	i = irq % MAX_REGISR_IRQ_NUM;
+
 	en = reg_enable[g];
 	SET_MASK(*en, BIT(i));
 }
