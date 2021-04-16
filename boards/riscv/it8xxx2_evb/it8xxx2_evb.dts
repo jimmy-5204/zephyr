@@ -20,10 +20,55 @@
 		zephyr,code-partition = &slot0_partition;
 	};
 };
+
+
+
+&gpioa {
+	status = "okay";
+};
 &gpiob {
 	status = "okay";
 };
+&gpioc {
+	status = "okay";
+};
+&gpiod {
+	status = "okay";
+};
+&gpioe {
+	status = "okay";
+};
 &gpiof {
+	status = "okay";
+};
+&gpiog {
+	status = "okay";
+};
+&gpioh {
+	status = "okay";
+};
+&gpioi {
+	status = "okay";
+};
+&gpioj {
+	status = "okay";
+};
+&gpiok {
+	status = "okay";
+};
+&gpiol {
+	status = "okay";
+};
+&gpiom {
+	status = "okay";
+};
+&gpioksi {
+	status = "okay";
+};
+&gpioksoh {
+	status = "okay";
+};
+&gpioksol {
 	status = "okay";
 };
 &i2c0 {

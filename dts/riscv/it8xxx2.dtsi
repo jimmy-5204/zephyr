@@ -56,6 +56,12 @@
 			interrupt-controller;
 			reg = <0x00f03f00 0x0100>;
 		};
+		gpintc: gpinterrupt-controller@f03f00 {
+			#interrupt-cells = <9>;
+			compatible = "ite,it8xxx2-gpintc";
+			interrupt-controller;
+			reg = <0x00f03f00 0x0100>;
+		};
 		uart1: uart@f02700 {
 			compatible = "ns16550";
 			reg = <0x00f02700 0x0020>;
@@ -89,50 +95,474 @@
 				80 IRQ_TYPE_EDGE_RISING>;
 			interrupt-parent = <&intc>;
 		};
+
+		gpioa: gpio@f01601 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01601 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_A";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <96 IRQ_TYPE_LEVEL_HIGH 0 3
+				0x00f01610 0x00f01671
+				0x00f01b1c 0x00f01b1d 0x00f01b1f
+				97 IRQ_TYPE_LEVEL_HIGH 1 4
+				0x00f01611 0x00f01671
+				0x00f01b1c 0x00f01b1d 0x00f01b1f
+				98 IRQ_TYPE_LEVEL_HIGH 2 5
+				0x00f01612 0x00f01671
+				0x00f01b1c 0x00f01b1d 0x00f01b1f
+				88 IRQ_TYPE_LEVEL_HIGH 3 0
+				0x00f01613 0x00f01671
+				0x00f01b18 0x00f01b19 0x00f01b1b
+				89 IRQ_TYPE_LEVEL_HIGH 4 1
+				0x00f01614 0x00f01671
+				0x00f01b18 0x00f01b19 0x00f01b1b
+				90 IRQ_TYPE_LEVEL_HIGH 5 2
+				0x00f01615 0x00f01671
+				0x00f01b18 0x00f01b19 0x00f01b1b
+				91 IRQ_TYPE_LEVEL_HIGH 6 3
+				0x00f01616 0x00f01671
+				0x00f01b18 0x00f01b19 0x00f01b1b
+				105 IRQ_TYPE_LEVEL_HIGH 7 4
+				0x00f01617 0x00f01671
+				0x00f01b20 0x00f01b21 0x00f01b23>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
 		gpiob: gpio@f01602 {
 			compatible = "ite,it8xxx2-gpio";
 			reg = <0x00f01602 0x0001>;
 			ngpios = <8>;
-			label = "GPDRB";
+			label = "GPIO_B";
 			status = "disabled";
 			gpio-controller;
-			interrupts = <106 IRQ_TYPE_LEVEL_HIGH
-				107 IRQ_TYPE_LEVEL_HIGH
-				92 IRQ_TYPE_LEVEL_HIGH
-				108 IRQ_TYPE_LEVEL_HIGH
-				99 IRQ_TYPE_LEVEL_HIGH
-				109 IRQ_TYPE_LEVEL_HIGH
-				110 IRQ_TYPE_LEVEL_HIGH
-				111 IRQ_TYPE_LEVEL_HIGH>;
-			interrupt-parent = <&intc>;
+			interrupts = <106 IRQ_TYPE_LEVEL_HIGH 0 5
+				0x00f01618 0x00f01672
+				0x00f01b20 0x00f01b21 0x00f01b23
+				107 IRQ_TYPE_LEVEL_HIGH 1 6
+				0x00f01619 0x00f01672
+				0x00f01b20 0x00f01b21 0x00f01b23
+				92 IRQ_TYPE_LEVEL_HIGH 2 4
+				0x00f0161a 0x00f01672
+				0x00f01b18 0x00f01b19 0x00f01b1b
+				108 IRQ_TYPE_LEVEL_HIGH 3 7
+				0x00f0161b 0x00f01672
+				0x00f01b20 0x00f01b21 0x00f01b23
+				99 IRQ_TYPE_LEVEL_HIGH 4 6
+				0x00f0161c 0x00f01672
+				0x00f01b1c 0x00f01b1d 0x00f01b1f
+				109 IRQ_TYPE_LEVEL_HIGH 5 0
+				0x00f0161d 0x00f01672
+				0x00f01b24 0x00f01b25 0x00f01b27
+				110 IRQ_TYPE_LEVEL_HIGH 6 1
+				0x00f0161e 0x00f01672
+				0x00f01b24 0x00f01b25 0x00f01b27
+				111 IRQ_TYPE_LEVEL_HIGH 7 2
+				0x00f0161f 0x00f01672
+				0x00f01b24 0x00f01b25 0x00f01b27>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpioc: gpio@f01603 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01603 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_C";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <93 IRQ_TYPE_LEVEL_HIGH 0 5
+				0x00f01620 0x00f01673
+				0x00f01b18 0x00f01b19 0x00f01b1b
+				112 IRQ_TYPE_LEVEL_HIGH 1 3
+				0x00f01621 0x00f01673
+				0x00f01b24 0x00f01b25 0x00f01b27
+				100 IRQ_TYPE_LEVEL_HIGH 2 7
+				0x00f01622 0x00f01673
+				0x00f01b1c 0x00f01b1d 0x00f01b1f
+				113 IRQ_TYPE_LEVEL_HIGH 3 4
+				0x00f01623 0x00f01673
+				0x00f01b24 0x00f01b25 0x00f01b27
+				21 IRQ_TYPE_LEVEL_HIGH 4 2
+				0x00f01624 0x00f01673
+				0x00f01b01 0x00f01b05 0x00f01b3d
+				114 IRQ_TYPE_LEVEL_HIGH 5 5
+				0x00f01625 0x00f01673
+				0x00f01b24 0x00f01b25 0x00f01b27
+				6 IRQ_TYPE_LEVEL_HIGH 6 3
+				0x00f01626 0x00f01673
+				0x00f01b01 0x00f01b05 0x00f01b3d
+				94 IRQ_TYPE_LEVEL_HIGH 7 6
+				0x00f01627 0x00f01673
+				0x00f01b18 0x00f01b19 0x00f01b1b>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpiod: gpio@f01604 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01604 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_D";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <1 IRQ_TYPE_LEVEL_HIGH 0 0
+				0x00f01628 0x00f01674
+				0x00f01b01 0x00f01b05 0x00f01b3d
+				31 IRQ_TYPE_LEVEL_HIGH 1 1
+				0x00f01629 0x00f01674
+				0x00f01b01 0x00f01b05 0x00f01b3d
+				17 IRQ_TYPE_LEVEL_HIGH 2 4
+				0x00f0162a 0x00f01674
+				0x00f01b01 0x00f01b05 0x00f01b3d
+				115 IRQ_TYPE_LEVEL_HIGH 3 6
+				0x00f0162b 0x00f01674
+				0x00f01b24 0x00f01b25 0x00f01b27
+				116 IRQ_TYPE_LEVEL_HIGH 4 7
+				0x00f0162c 0x00f01674
+				0x00f01b24 0x00f01b25 0x00f01b27
+				117 IRQ_TYPE_LEVEL_HIGH 5 0
+				0x00f0162d 0x00f01674
+				0x00f01b28 0x00f01b29 0x00f01b2b
+				118 IRQ_TYPE_LEVEL_HIGH 6 1
+				0x00f0162e 0x00f01674
+				0x00f01b28 0x00f01b29 0x00f01b2b
+				95 IRQ_TYPE_LEVEL_HIGH 7 7
+				0x00f0162f 0x00f01674
+				0x00f01b18 0x00f01b19 0x00f01b1b>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpioe: gpio@f01605 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01605 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_E";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <72 IRQ_TYPE_LEVEL_HIGH 0 0
+				0x00f01630 0x00f01675
+				0x00f01b14 0x00f01b15 0x00f01b17
+				73 IRQ_TYPE_LEVEL_HIGH 1 1
+				0x00f01631 0x00f01675
+				0x00f01b14 0x00f01b15 0x00f01b17
+				74 IRQ_TYPE_LEVEL_HIGH 2 2
+				0x00f01632 0x00f01675
+				0x00f01b14 0x00f01b15 0x00f01b17
+				75 IRQ_TYPE_LEVEL_HIGH 3 3
+				0x00f01633 0x00f01675
+				0x00f01b14 0x00f01b15 0x00f01b17
+				119 IRQ_TYPE_LEVEL_HIGH 4 2
+				0x00f01634 0x00f01675
+				0x00f01b28 0x00f01b29 0x00f01b2b
+				176 IRQ_TYPE_LEVEL_HIGH 5 0
+				0x00f01635 0x00f01675
+				0x00f01b03 0x00f01b07 0x00f01b3f
+				177 IRQ_TYPE_LEVEL_HIGH 6 5
+				0x00f01636 0x00f01675
+				0x00f01b03 0x00f01b07 0x00f01b3f
+				178 IRQ_TYPE_LEVEL_HIGH 7 6
+				0x00f01637 0x00f01675
+				0x00f01b03 0x00f01b07 0x00f01b3f>;
+			interrupt-parent = <&gpintc>;
 			#gpio-cells = <2>;
 		};
 		gpiof: gpio@f01606 {
 			compatible = "ite,it8xxx2-gpio";
 			reg = <0x00f01606 0x0001>;
 			ngpios = <8>;
-			label = "GPDRF";
+			label = "GPIO_F";
 			status = "disabled";
 			gpio-controller;
-			interrupts = <101 IRQ_TYPE_LEVEL_HIGH
-				102 IRQ_TYPE_LEVEL_HIGH
-				103 IRQ_TYPE_LEVEL_HIGH
-				104 IRQ_TYPE_LEVEL_HIGH
-				52 IRQ_TYPE_LEVEL_HIGH
-				53 IRQ_TYPE_LEVEL_HIGH
-				54 IRQ_TYPE_LEVEL_HIGH
-				55 IRQ_TYPE_LEVEL_HIGH>;
-			interrupt-parent = <&intc>;
+			interrupts = <101 IRQ_TYPE_LEVEL_HIGH 0 0
+				0x00f01638 0x00f01676
+				0x00f01b20 0x00f01b21 0x00f01b23
+				102 IRQ_TYPE_LEVEL_HIGH 1 1
+				0x00f01639 0x00f01676
+				0x00f01b20 0x00f01b21 0x00f01b23
+				103 IRQ_TYPE_LEVEL_HIGH 2 2
+				0x00f0163a 0x00f01676
+				0x00f01b20 0x00f01b21 0x00f01b23
+				104 IRQ_TYPE_LEVEL_HIGH 3 3
+				0x00f0163b 0x00f01676
+				0x00f01b20 0x00f01b21 0x00f01b23
+				52 IRQ_TYPE_LEVEL_HIGH 4 4
+				0x00f0163c 0x00f01676
+				0x00f01b10 0x00f01b11 0x00f01b13
+				53 IRQ_TYPE_LEVEL_HIGH 5 5
+				0x00f0163d 0x00f01676
+				0x00f01b10 0x00f01b11 0x00f01b13
+				54 IRQ_TYPE_LEVEL_HIGH 6 6
+				0x00f0163e 0x00f01676
+				0x00f01b10 0x00f01b11 0x00f01b13
+				55 IRQ_TYPE_LEVEL_HIGH 7 7
+				0x00f0163f 0x00f01676
+				0x00f01b10 0x00f01b11 0x00f01b13>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpiog: gpio@f01607 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01607 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_G";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <120 IRQ_TYPE_LEVEL_HIGH 0 3
+				0x00f01640 0x00f01677
+				0x00f01b28 0x00f01b29 0x00f01b2b
+				121 IRQ_TYPE_LEVEL_HIGH 1 4
+				0x00f01641 0x00f01677
+				0x00f01b28 0x00f01b29 0x00f01b2b
+				122 IRQ_TYPE_LEVEL_HIGH 2 5
+				0x00f01642 0x00f01677
+				0x00f01b28 0x00f01b29 0x00f01b2b
+				144 IRQ_TYPE_LEVEL_HIGH 3 3
+				0x00f01643 0x00f01677
+				0x00f01b2c 0x00f01b2d 0x00f01b2f
+				145 IRQ_TYPE_LEVEL_HIGH 4 4
+				0x00f01644 0x00f01677
+				0x00f01b2c 0x00f01b2d 0x00f01b2f
+				146 IRQ_TYPE_LEVEL_HIGH 5 5
+				0x00f01645 0x00f01677
+				0x00f01b2c 0x00f01b2d 0x00f01b2f
+				123 IRQ_TYPE_LEVEL_HIGH 6 6
+				0x00f01646 0x00f01677
+				0x00f01b28 0x00f01b29 0x00f01b2b
+				147 IRQ_TYPE_LEVEL_HIGH 7 6
+				0x00f01647 0x00f01677
+				0x00f01b2c 0x00f01b2d 0x00f01b2f>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpioh: gpio@f01608 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01608 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_H";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <48 IRQ_TYPE_LEVEL_HIGH 0 0
+				0x00f01648 0x00f01678
+				0x00f01b10 0x00f01b11 0x00f01b13
+				49 IRQ_TYPE_LEVEL_HIGH 1 1
+				0x00f01649 0x00f01678
+				0x00f01b10 0x00f01b11 0x00f01b13
+				50 IRQ_TYPE_LEVEL_HIGH 2 2
+				0x00f0164a 0x00f01678
+				0x00f01b10 0x00f01b11 0x00f01b13
+				51 IRQ_TYPE_LEVEL_HIGH 3 3
+				0x00f0164b 0x00f01678
+				0x00f01b10 0x00f01b11 0x00f01b13
+				85 IRQ_TYPE_LEVEL_HIGH 4 0
+				0x00f0164c 0x00f01678
+				0x00f01b1c 0x00f01b1d 0x00f01b1f
+				86 IRQ_TYPE_LEVEL_HIGH 5 1
+				0x00f0164d 0x00f01678
+				0x00f01b1c 0x00f01b1d 0x00f01b1f
+				87 IRQ_TYPE_LEVEL_HIGH 6 2
+				0x00f0164e 0x00f01678
+				0x00f01b1c 0x00f01b1d 0x00f01b1f
+				186 IRQ_TYPE_LEVEL_HIGH 7 8
+				0x00f0164f 0x00f01678
+				0x00000000 0x00000000 0x00000000>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpioi: gpio@f01609 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01609 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_I";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <124 IRQ_TYPE_LEVEL_HIGH 0 7
+				0x00f01650 0x00f01679
+				0x00f01b28 0x00f01b29 0x00f01b2b
+				125 IRQ_TYPE_LEVEL_HIGH 1 0
+				0x00f01651 0x00f01679
+				0x00f01b2c 0x00f01b2d 0x00f01b2f
+				126 IRQ_TYPE_LEVEL_HIGH 2 1
+				0x00f01652 0x00f01679
+				0x00f01b2c 0x00f01b2d 0x00f01b2f
+				127 IRQ_TYPE_LEVEL_HIGH 3 2
+				0x00f01653 0x00f01679
+				0x00f01b2c 0x00f01b2d 0x00f01b2f
+				76 IRQ_TYPE_LEVEL_HIGH 4 4
+				0x00f01654 0x00f01679
+				0x00f01b14 0x00f01b15 0x00f01b17
+				77 IRQ_TYPE_LEVEL_HIGH 5 5
+				0x00f01655 0x00f01679
+				0x00f01b14 0x00f01b15 0x00f01b17
+				78 IRQ_TYPE_LEVEL_HIGH 6 6
+				0x00f01656 0x00f01679
+				0x00f01b14 0x00f01b15 0x00f01b17
+				79 IRQ_TYPE_LEVEL_HIGH 7 7
+				0x00f01657 0x00f01679
+				0x00f01b14 0x00f01b15 0x00f01b17>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpioj: gpio@f0160a {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f0160a 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_J";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <128 IRQ_TYPE_LEVEL_HIGH 0 0
+				0x00f01658 0x00f0167a
+				0x00f01b30 0x00f01b31 0x00f01b33
+				129 IRQ_TYPE_LEVEL_HIGH 1 1
+				0x00f01659 0x00f0167a
+				0x00f01b30 0x00f01b31 0x00f01b33
+				130 IRQ_TYPE_LEVEL_HIGH 2 2
+				0x00f0165a 0x00f0167a
+				0x00f01b30 0x00f01b31 0x00f01b33
+				131 IRQ_TYPE_LEVEL_HIGH 3 3
+				0x00f0165b 0x00f0167a
+				0x00f01b30 0x00f01b31 0x00f01b33
+				132 IRQ_TYPE_LEVEL_HIGH 4 4
+				0x00f0165c 0x00f0167a
+				0x00f01b30 0x00f01b31 0x00f01b33
+				133 IRQ_TYPE_LEVEL_HIGH 5 5
+				0x00f0165d 0x00f0167a
+				0x00f01b30 0x00f01b31 0x00f01b33
+				134 IRQ_TYPE_LEVEL_HIGH 6 6
+				0x00f0165e 0x00f0167a
+				0x00f01b30 0x00f01b31 0x00f01b33
+				135 IRQ_TYPE_LEVEL_HIGH 7 7
+				0x00f0165f 0x00f0167a
+				0x00f01b30 0x00f01b31 0x00f01b33>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpiok: gpio@f0160b {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f0160b 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_K";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <40 IRQ_TYPE_LEVEL_HIGH 0 0
+				0x00f01690 0x00f0167b
+				0x00f01b0c 0x00f01b0d 0x00f01b05
+				41 IRQ_TYPE_LEVEL_HIGH 1 1
+				0x00f01691 0x00f0167b
+				0x00f01b0c 0x00f01b0d 0x00f01b05
+				42 IRQ_TYPE_LEVEL_HIGH 2 2
+				0x00f01692 0x00f0167b
+				0x00f01b0c 0x00f01b0d 0x00f01b05
+				43 IRQ_TYPE_LEVEL_HIGH 3 3
+				0x00f01693 0x00f0167b
+				0x00f01b0c 0x00f01b0d 0x00f01b05
+				44 IRQ_TYPE_LEVEL_HIGH 4 4
+				0x00f01694 0x00f0167b
+				0x00f01b0c 0x00f01b0d 0x00f01b05
+				45 IRQ_TYPE_LEVEL_HIGH 5 5
+				0x00f01695 0x00f0167b
+				0x00f01b0c 0x00f01b0d 0x00f01b05
+				46 IRQ_TYPE_LEVEL_HIGH 6 6
+				0x00f01696 0x00f0167b
+				0x00f01b0c 0x00f01b0d 0x00f01b05
+				47 IRQ_TYPE_LEVEL_HIGH 7 7
+				0x00f01697 0x00f0167b
+				0x00f01b0c 0x00f01b0d 0x00f01b05>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpiol: gpio@f0160c {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f0160c 0x0001>;
+			ngpios = <8>;
+			label = "GPIO_L";
+			status = "disabled";
+			gpio-controller;
+			interrupts = <136 IRQ_TYPE_LEVEL_HIGH 0 0
+				0x00f01698 0x00f0167c
+				0x00f01b34 0x00f01b35 0x00f01b37
+				137 IRQ_TYPE_LEVEL_HIGH 1 1
+				0x00f01699 0x00f0167c
+				0x00f01b34 0x00f01b35 0x00f01b37
+				138 IRQ_TYPE_LEVEL_HIGH 2 2
+				0x00f0169a 0x00f0167c
+				0x00f01b34 0x00f01b35 0x00f01b37
+				139 IRQ_TYPE_LEVEL_HIGH 3 3
+				0x00f0169b 0x00f0167c
+				0x00f01b34 0x00f01b35 0x00f01b37
+				140 IRQ_TYPE_LEVEL_HIGH 4 4
+				0x00f0169c 0x00f0167c
+				0x00f01b34 0x00f01b35 0x00f01b37
+				141 IRQ_TYPE_LEVEL_HIGH 5 5
+				0x00f0169d 0x00f0167c
+				0x00f01b34 0x00f01b35 0x00f01b37
+				142 IRQ_TYPE_LEVEL_HIGH 6 6
+				0x00f0169e 0x00f0167c
+				0x00f01b34 0x00f01b35 0x00f01b37
+				143 IRQ_TYPE_LEVEL_HIGH 7 7
+				0x00f0169f 0x00f0167c
+				0x00f01b34 0x00f01b35 0x00f01b37>;
+			interrupt-parent = <&gpintc>;
 			#gpio-cells = <2>;
 		};
 		gpiom: gpio@f0160D {
 			compatible = "ite,it8xxx2-gpio";
 			reg = <0x00f0160D 0x0001>;
 			ngpios = <8>;
-			label = "GPDRM";
+			label = "GPIO_M";
 			status = "disabled";
 			gpio-controller;
-			interrupt-parent = <&intc>;
+			interrupts = <179 IRQ_TYPE_LEVEL_HIGH 0 0
+				0x00f016a0 0x00f0167d
+				0x00f01b38 0x00f01b39 0x00f01b3b
+				180 IRQ_TYPE_LEVEL_HIGH 1 1
+				0x00f016a1 0x00f0167d
+				0x00f01b38 0x00f01b39 0x00f01b3b
+				181 IRQ_TYPE_LEVEL_HIGH 2 2
+				0x00f016a2 0x00f0167d
+				0x00f01b38 0x00f01b39 0x00f01b3b
+				182 IRQ_TYPE_LEVEL_HIGH 3 3
+				0x00f016a3 0x00f0167d
+				0x00f01b38 0x00f01b39 0x00f01b3b
+				183 IRQ_TYPE_LEVEL_HIGH 4 4
+				0x00f016a4 0x00f0167d
+				0x00f01b38 0x00f01b39 0x00f01b3b
+				184 IRQ_TYPE_LEVEL_HIGH 5 5
+				0x00f016a5 0x00f0167d
+				0x00f01b38 0x00f01b39 0x00f01b3b
+				185 IRQ_TYPE_LEVEL_HIGH 6 6
+				0x00f016a6 0x00f0167d
+				0x00f01b38 0x00f01b39 0x00f01b3b
+				186 IRQ_TYPE_LEVEL_HIGH 7 7
+				0x00000000 0x00000000
+				0x00000000 0x00000000 0x00000000>;
+			interrupt-parent = <&gpintc>;
+			#gpio-cells = <2>;
+		};
+		gpioksi: gpio@f01D04 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01D04 0x01>;
+			ngpios = <8>;
+			label = "GPIO_KSI";
+			status = "disabled";
+			gpio-controller;
+			#gpio-cells = <2>;
+		};
+		gpioksoh: gpio@f01D01 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01D01 0x01>;
+			ngpios = <8>;
+			label = "GPIO_KSOH";
+			status = "disabled";
+			gpio-controller;
+			#gpio-cells = <2>;
+		};
+		gpioksol: gpio@f01D00 {
+			compatible = "ite,it8xxx2-gpio";
+			reg = <0x00f01D00 0x01>;
+			ngpios = <8>;
+			label = "GPIO_KSOL";
+			status = "disabled";
+			gpio-controller;
 			#gpio-cells = <2>;
 		};
 		spi0:spi@f02600  {

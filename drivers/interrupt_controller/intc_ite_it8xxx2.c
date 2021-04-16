@@ -11,26 +11,26 @@
 #include <sw_isr_table.h>
 #include "intc_ite_it8xxx2.h"
 
-#define MAX_REGISR_IRQ_NUM		8
-#define IVECT_OFFSET_WITH_IRQ		0x10
-#define SOFT_INTC_IRQ			161	/* software interrupt */
+#define MAX_REGISR_IRQ_NUM              8
+#define IVECT_OFFSET_WITH_IRQ           0x10
+#define SOFT_INTC_IRQ                   161     /* software interrupt */
 
-static volatile uint8_t *const reg_status[MAX_ISR_REG_NUM] = {
+static volatile uint8_t *const reg_status[] = {
 	&ISR0, &ISR1, &ISR2, &ISR3,
 	&ISR4, &ISR5, &ISR6, &ISR7,
 	&ISR8, &ISR9, &ISR10, &ISR11,
 	&ISR12, &ISR13, &ISR14, &ISR15,
 	&ISR16, &ISR17, &ISR18, &ISR19,
-	&ISR20
+	&ISR20, &ISR21, &ISR22, &ISR23
 };
 
-static volatile uint8_t *const reg_enable[MAX_ISR_REG_NUM] = {
+static volatile uint8_t *const reg_enable[] = {
 	&IER0, &IER1, &IER2, &IER3,
 	&IER4, &IER5, &IER6, &IER7,
 	&IER8, &IER9, &IER10, &IER11,
 	&IER12, &IER13, &IER14, &IER15,
 	&IER16, &IER17, &IER18, &IER19,
-	&IER20
+	&IER20, &IER21, &IER22, &IER23
 };
 
 /* edge/level trigger register */
@@ -40,7 +40,7 @@ static volatile uint8_t *const reg_ielmr[] = {
 	&IELMR8, &IELMR9, &IELMR10, &IELMR11,
 	&IELMR12, &IELMR13, &IELMR14, &IELMR15,
 	&IELMR16, &IELMR17, &IELMR18, &IELMR19,
-	&IELMR20
+	&IELMR20, &IELMR21, &IELMR22, &IELMR23,
 };
 
 /* high/low trigger register */
@@ -50,7 +50,7 @@ static volatile uint8_t *const reg_ipolr[] = {
 	&IPOLR8, &IPOLR9, &IPOLR10, &IPOLR11,
 	&IPOLR12, &IPOLR13, &IPOLR14, &IPOLR15,
 	&IPOLR16, &IPOLR17, &IPOLR18, &IPOLR19,
-	&IPOLR20
+	&IPOLR20, &IPOLR21, &IPOLR22, &IPOLR23
 };
 
 inline void set_csr(unsigned long bit)
@@ -90,6 +90,7 @@ void ite_intc_irq_enable(unsigned int irq)
 	}
 	g = irq / MAX_REGISR_IRQ_NUM;
 	i = irq % MAX_REGISR_IRQ_NUM;
+
 	en = reg_enable[g];
 	SET_MASK(*en, BIT(i));
 }
@@ -109,24 +110,24 @@ void ite_intc_irq_disable(unsigned int irq)
 }
 
 void ite_intc_irq_priority_set(unsigned int irq,
-		unsigned int prio, unsigned int flags)
+			       unsigned int prio, unsigned int flags)
 {
 	uint32_t g, i;
 	volatile uint8_t *tri;
 
-	if ((irq > CONFIG_NUM_IRQS) || (flags&IRQ_TYPE_EDGE_BOTH)) {
+	if ((irq > CONFIG_NUM_IRQS) || (flags & IRQ_TYPE_EDGE_BOTH)) {
 		return;
 	}
 	g = irq / MAX_REGISR_IRQ_NUM;
 	i = irq % MAX_REGISR_IRQ_NUM;
 	tri = reg_ipolr[g];
-	if ((flags&IRQ_TYPE_LEVEL_HIGH) || (flags&IRQ_TYPE_EDGE_RISING)) {
+	if ((flags & IRQ_TYPE_LEVEL_HIGH) || (flags & IRQ_TYPE_EDGE_RISING)) {
 		CLEAR_MASK(*tri, BIT(i));
 	} else {
 		SET_MASK(*tri, BIT(i));
 	}
 	tri = reg_ielmr[g];
-	if ((flags&IRQ_TYPE_LEVEL_LOW) || (flags&IRQ_TYPE_LEVEL_HIGH)) {
+	if ((flags & IRQ_TYPE_LEVEL_LOW) || (flags & IRQ_TYPE_LEVEL_HIGH)) {
 		CLEAR_MASK(*tri, BIT(i));
 	} else {
 		SET_MASK(*tri, BIT(i));
