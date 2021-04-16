@@ -420,9 +420,6 @@ static const struct gpio_driver_api gpio_ite_driver_api = {
 	.pin_interrupt_configure = gpio_ite_pin_interrupt_configure,
 	.manage_callback = gpio_ite_manage_callback,
 };
-	#define dd(...) printf(__VA_ARGS__)
-	#define SPIS_DEV_DBG_L(...)             printk(__VA_ARGS__)
-
 
 
 static int gpio_ite_init(const struct device *dev)
